@@ -120,7 +120,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void iniciarSesion () {
-        auth.signInAnonymously ()
-                .addOnFailureListener(e -> Log.e ("FBDB", "Fail on anonymous auth", e));
+        auth.signInWithEmailAndPassword( "something@yes.com", "123456" )
+                .addOnSuccessListener(e -> Log.e ( "FBDB", "Acceso correcto" ) )
+                .addOnFailureListener(e -> Log.e ( "FBDB", "Acceso incorrecto" ) );
+        // auth.signInAnonymously () .addOnFailureListener(e -> Log.e ("FBDB", "Fail on anonymous auth", e));
     }
 }
