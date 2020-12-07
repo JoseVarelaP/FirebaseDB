@@ -71,10 +71,6 @@ public class MainActivity extends AppCompatActivity {
                 holder.tvAlbum.setText (model.getDireccion());
                 holder.tvYear.setText (""+model.getEdad());
                 holder.tvCompany.setText (model.getTelefono());
-
-                holder.itemView.setOnClickListener(v -> {
-                    Toast.makeText(v.getContext(),"click on item: "+ model.getNombre() ,Toast.LENGTH_LONG).show();
-                });
             }
 
             @NonNull
@@ -92,6 +88,6 @@ public class MainActivity extends AppCompatActivity {
 
     void iniciarSesion () {
         auth.signInAnonymously ()
-                .addOnFailureListener(e -> Log.e ("TYAM", "Fail on anonymous auth", e));
+                .addOnFailureListener(e -> Log.e ("FBDB", "Fail on anonymous auth", e));
     }
 }

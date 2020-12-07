@@ -1,5 +1,6 @@
 package com.jv.firebasedb;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -55,7 +56,9 @@ public class RegistroUsuario extends AppCompatActivity {
 
         songs.updateChildren (node)
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText (getBaseContext (), "Node added successfully " + NuevoMD5 , Toast.LENGTH_LONG).show ();
+                    Toast.makeText (getBaseContext (), "Entrada añadida exitosamente.", Toast.LENGTH_LONG).show ();
+                    // Devuelve el usuario a la pantalla principal.
+                    finish();
                 })
                 .addOnFailureListener(e -> Toast.makeText (getBaseContext (), "Node add failed: " + e.getMessage (), Toast.LENGTH_LONG).show ());
     }

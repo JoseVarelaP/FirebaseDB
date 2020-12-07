@@ -1,11 +1,11 @@
 package com.jv.firebasedb;
 
 public class Usuario {
-    private String Nombres = "";
-    private String Apellidos = "";
-    private String Direccion = "";
-    private int Edad = 0;
-    private String Telefono = "";
+    private String Nombres;
+    private String Apellidos;
+    private String Direccion;
+    private int Edad;
+    private String Telefono;
 
     public Usuario() {}
 
