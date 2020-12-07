@@ -9,6 +9,8 @@ public class Utilidades {
 
     public String md5(String s) {
         try {
+            if( s == null )
+                return "";
             // Crea el hash y convertelo.
             MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
             digest.update(s.getBytes());

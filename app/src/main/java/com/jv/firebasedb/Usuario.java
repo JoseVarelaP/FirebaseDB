@@ -1,11 +1,16 @@
 package com.jv.firebasedb;
 
+import android.media.Image;
+import android.net.Uri;
+import android.widget.ImageView;
+
 public class Usuario {
     private String Nombres;
     private String Apellidos;
     private String Direccion;
     private int Edad;
     private String Telefono;
+    private ImageView img;
 
     public Usuario() {}
 

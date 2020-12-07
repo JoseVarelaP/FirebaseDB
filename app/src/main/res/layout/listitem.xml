@@ -24,19 +24,17 @@
             android:layout_height="0dp"
             android:layout_centerHorizontal="true" />
 
-        <TextView
-            android:id="@+id/tvAuthor"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@id/strut"
-            android:text="Author"
-            android:layout_alignParentStart="true"  />
+        <ImageView
+            android:id="@+id/imgset"
+            android:layout_width="128dp"
+            android:layout_height="128dp" />
 
         <TextView
             android:id="@+id/tvComponser"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@id/strut"
+            android:layout_below="@id/tvAlbum"
+            android:layout_alignStart="@id/tvAlbum"
             android:layout_alignParentEnd="true"
             android:text="Composer"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
@@ -45,9 +43,8 @@
             android:id="@+id/tvAlbum"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvAuthor"
-            android:layout_alignEnd="@id/strut"
-            android:layout_alignParentStart="true"
+            android:layout_alignStart="@id/strut"
+            android:layout_alignParentEnd="true"
             android:text="Album"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
 
@@ -65,7 +62,8 @@
             android:id="@+id/tvCompany"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvAlbum"
+            android:layout_below="@id/tvYear"
+            android:layout_alignStart="@id/strut"
             android:text="Company"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault" />
 

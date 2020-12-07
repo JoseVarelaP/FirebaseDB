@@ -1,6 +1,8 @@
 package com.jv.firebasedb;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,12 +17,16 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.Vector;
 
@@ -59,13 +65,37 @@ public class MainActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance ();
         iniciarSesion ();
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance ();
         DatabaseReference songs = FirebaseDatabase.getInstance().getReference().child("usuarios");
+
+        FirebaseStorage storage = FirebaseStorage.getInstance ();
 
         options = new FirebaseRecyclerOptions.Builder<Usuario>().setQuery( songs, Usuario.class ).build();
         adapter = new FirebaseRecyclerAdapter<Usuario, MyViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Usuario model) {
+
+                // Configura la imagen.
+                Utilidades u = new Utilidades();
+                StorageReference folder = storage.getReference ("assets");
+                StorageReference imageFile = folder.child ( u.md5( model.getNombre() ) + ".png");
+
+                final long SIZE_BUFFER = 1024 * 1024;
+                imageFile.getBytes (SIZE_BUFFER)
+                        .addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess (byte[] bytes) {
+                                Bitmap bitmap = BitmapFactory.decodeByteArray (bytes, 0, bytes.length);
+                                holder.img.setImageBitmap (bitmap);
+                                Log.i("Image","Loaded image! ("+ model.getNombre() + ")" );
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure (@NonNull Exception e) {
+                        Toast.makeText (getBaseContext (), "Error: " + e.getMessage (), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                // Configura lo demás.
                 holder.tvTitle.setText (model.getNombre());
                 holder.tvComposer.setText (model.getApellidos());
                 holder.tvAlbum.setText (model.getDireccion());
