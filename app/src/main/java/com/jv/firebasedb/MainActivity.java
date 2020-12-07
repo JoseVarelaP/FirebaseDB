@@ -1,6 +1,7 @@
 package com.jv.firebasedb;
 
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.InputStream;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity {
@@ -76,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Configura la imagen.
                 Utilidades u = new Utilidades();
-                StorageReference folder = storage.getReference ("assets");
+                StorageReference folder = storage.getReference ("images/");
                 StorageReference imageFile = folder.child ( u.md5( model.getNombre() ) + ".png");
 
                 final long SIZE_BUFFER = 1024 * 1024;
@@ -91,7 +93,8 @@ public class MainActivity extends AppCompatActivity {
                         }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure (@NonNull Exception e) {
-                        Toast.makeText (getBaseContext (), "Error: " + e.getMessage (), Toast.LENGTH_LONG).show();
+                        holder.img.setImageResource( R.drawable.default_picture );
+                        // Toast.makeText (getBaseContext (), "Error: " + e.getMessage (), Toast.LENGTH_LONG).show();
                     }
                 });
 
